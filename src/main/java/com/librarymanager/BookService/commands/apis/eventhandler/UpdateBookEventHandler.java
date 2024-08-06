@@ -18,7 +18,7 @@ public class UpdateBookEventHandler {
         Book bookNeedToUpdateInfo = event.getBook();
         Book target = bookRepository.findById(bookNeedToUpdateInfo.getBookId()).orElseThrow();
 
-        target.Copy(bookNeedToUpdateInfo);
+        target.copy(bookNeedToUpdateInfo);
         bookRepository.save(target);
     }
 }

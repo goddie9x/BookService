@@ -9,10 +9,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import com.librarymanager.BookService.commands.apis.commands.CreateBookCommand;
 import com.librarymanager.BookService.commands.apis.commands.DeleteBookCommand;
 import com.librarymanager.BookService.commands.apis.commands.UpdateBookCommand;
-import com.librarymanager.BookService.commands.apis.events.CreateBookEvent;
-import com.librarymanager.BookService.commands.apis.events.DeleteBookEvent;
 import com.librarymanager.BookService.commands.apis.events.IEvent;
-import com.librarymanager.BookService.commands.apis.events.UpdateBookEvent;
 
 import lombok.NoArgsConstructor;
 
@@ -24,21 +21,21 @@ public class BookAggregate {
 
     @CommandHandler
     public BookAggregate(CreateBookCommand createBookCommand) {
-        AggregateLifecycle.apply(createBookCommand.genCreateBookEvent());
-    }
-
-    @EventSourcingHandler
-    public void on(IEvent event) {
-        aggregateIdentifier = event.getIdentifier();
+        AggregateLifecycle.apply(createBookCommand.genEvent());
     }
 
     @CommandHandler
     public BookAggregate(UpdateBookCommand updateBookCommand) {
-        AggregateLifecycle.apply(updateBookCommand.genUpdateBookEvent());
+        AggregateLifecycle.apply(updateBookCommand.genEvent());
     }
 
     @CommandHandler
     public BookAggregate(DeleteBookCommand deleteBookCommand) {
-        AggregateLifecycle.apply(deleteBookCommand.getDeleteBookEvent());
+        AggregateLifecycle.apply(deleteBookCommand.genEvent());
+    }
+
+    @EventSourcingHandler
+    public void on(IEvent event) {
+        aggregateIdentifier = event.getAggregateIdentifier();
     }
 }

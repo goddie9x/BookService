@@ -1,5 +1,7 @@
 package com.librarymanager.BookService.commands.apis.commands;
 
+import com.librarymanager.BookService.commands.apis.events.IEvent;
+
 public interface ICommand {
-    String getIdentifier();
+    public IEvent genEvent();
 }

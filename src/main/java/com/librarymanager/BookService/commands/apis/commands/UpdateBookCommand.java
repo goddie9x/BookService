@@ -1,5 +1,7 @@
 package com.librarymanager.BookService.commands.apis.commands;
 
+import java.util.UUID;
+
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import com.librarymanager.BookService.commands.apis.events.UpdateBookEvent;
@@ -16,10 +18,15 @@ import lombok.Setter;
 @Setter
 public class UpdateBookCommand implements ICommand {
     @TargetAggregateIdentifier
-    private String identifier;
+    private String aggregateIdentifier;
     private Book book;
 
-    public UpdateBookEvent genUpdateBookEvent() {
-        return new UpdateBookEvent(identifier, book);
+    public UpdateBookCommand(Book book) {
+        this.aggregateIdentifier = UUID.randomUUID().toString();
+        this.book = book;
+    }
+
+    public UpdateBookEvent genEvent() {
+        return new UpdateBookEvent(aggregateIdentifier, book);
     }
 }

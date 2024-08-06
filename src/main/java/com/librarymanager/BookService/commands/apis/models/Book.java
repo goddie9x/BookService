@@ -27,18 +27,15 @@ public class Book {
     private Boolean isReady;
 
     public CreateBookCommand genCreateBookCommand() {
-        return new CreateBookCommand(UUID.randomUUID().toString(), this.clone());
+        this.bookId = UUID.randomUUID().toString();
+        return new CreateBookCommand(this);
     }
 
     public UpdateBookCommand genUpdateBookCommand() {
-        return new UpdateBookCommand(UUID.randomUUID().toString(), this.clone());
+        return new UpdateBookCommand(this);
     }
 
-    public Book clone() {
-        return new Book(this.getBookId(), this.getName(), this.getAuthor(), this.getIsReady());
-    }
-
-    public void Copy(Book book) {
+    public void copy(Book book) {
         this.author = book.getAuthor();
         this.name = book.getName();
         this.isReady = book.getIsReady();

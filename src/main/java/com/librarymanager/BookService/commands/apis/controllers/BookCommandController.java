@@ -41,7 +41,7 @@ public class BookCommandController {
 
     @DeleteMapping("/{bookId}")
     public String deleteBook(@PathVariable String bookId) {
-        commandGateway.sendAndWait(new DeleteBookCommand(UUID.randomUUID().toString(), bookId));
+        commandGateway.sendAndWait(new DeleteBookCommand(bookId));
         return "Deleted book";
     }
 }

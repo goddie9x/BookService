@@ -1,22 +1,27 @@
 package com.librarymanager.BookService.commands.apis.commands;
 
+import java.util.UUID;
+
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import com.librarymanager.BookService.commands.apis.events.DeleteBookEvent;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
 @Getter
 @Setter
-public class DeleteBookCommand implements ICommand {
+public class DeleteBookCommand implements ICommand{
     @TargetAggregateIdentifier
-    private String identifier;
+    private String aggregateIdentifier;
     private String bookId;
 
-    public DeleteBookEvent getDeleteBookEvent() {
-        return new DeleteBookEvent(identifier, bookId);
+    public DeleteBookCommand(String bookId){
+        this.aggregateIdentifier = UUID.randomUUID().toString();
+        this.bookId = bookId;
+    }
+
+    public DeleteBookEvent genEvent() {
+        return new DeleteBookEvent(aggregateIdentifier,bookId);
     }
 }
