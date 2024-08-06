@@ -8,6 +8,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 
 import com.librarymanager.BookService.commands.apis.commands.CreateBookCommand;
 import com.librarymanager.BookService.commands.apis.commands.DeleteBookCommand;
+import com.librarymanager.BookService.commands.apis.commands.ICommand;
 import com.librarymanager.BookService.commands.apis.commands.UpdateBookCommand;
 import com.librarymanager.BookService.commands.apis.events.IEvent;
 
@@ -21,21 +22,25 @@ public class BookAggregate {
 
     @CommandHandler
     public BookAggregate(CreateBookCommand createBookCommand) {
-        AggregateLifecycle.apply(createBookCommand.genEvent());
+        applyEventToAggregateIdentifier(createBookCommand);
     }
 
     @CommandHandler
     public BookAggregate(UpdateBookCommand updateBookCommand) {
-        AggregateLifecycle.apply(updateBookCommand.genEvent());
+        applyEventToAggregateIdentifier(updateBookCommand);
     }
 
     @CommandHandler
     public BookAggregate(DeleteBookCommand deleteBookCommand) {
-        AggregateLifecycle.apply(deleteBookCommand.genEvent());
+        applyEventToAggregateIdentifier(deleteBookCommand);
     }
 
     @EventSourcingHandler
     public void on(IEvent event) {
         aggregateIdentifier = event.getAggregateIdentifier();
+    }
+
+    private void applyEventToAggregateIdentifier(ICommand command){
+        AggregateLifecycle.apply(command.genEvent());
     }
 }

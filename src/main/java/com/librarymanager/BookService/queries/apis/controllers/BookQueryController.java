@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.librarymanager.BookService.commands.apis.models.Book;
 import com.librarymanager.BookService.queries.apis.queries.GetAllBookWithPaginationQuery;
 import com.librarymanager.BookService.queries.apis.queries.GetBookQuery;
-import com.librarymanager.BookService.queries.apis.requests.PaginationRequest;
+import com.librarymanager.BookService.queries.apis.requests.PaginationQueryRequest;
 
 @RestController
 @RequestMapping("api/v1/books")
@@ -23,15 +23,16 @@ public class BookQueryController {
     private QueryGateway queryGateway;
 
     @GetMapping()
-    public List<Book> getAllBook(PaginationRequest requests) {
-        List<Book> response = queryGateway.query(GetAllBookWithPaginationQuery.fromPaginationRequest(requests),
+    public List<Book> getAllBookWithPagination(PaginationQueryRequest requests) {
+        List<Book> response = queryGateway.query(requests.genQuery(),
                 ResponseTypes.multipleInstancesOf(Book.class)).join();
         return response;
     }
 
     @GetMapping("/{bookId}")
     public Book getBookById(@PathVariable String bookId) {
-        Book response = queryGateway.query(new GetBookQuery(bookId), ResponseTypes.instanceOf(Book.class)).join();
+        GetBookQuery query = new GetBookQuery(bookId);
+        Book response = queryGateway.query(query, ResponseTypes.instanceOf(Book.class)).join();
 
         return response;
     }

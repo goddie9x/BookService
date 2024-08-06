@@ -21,11 +21,11 @@ public class CreateBookCommand implements ICommand{
 
     public CreateBookCommand(Book book) {
         this.aggregateIdentifier = UUID.randomUUID().toString();
+        book.setBookId(aggregateIdentifier);
         this.book = book;
     }
 
     public CreateBookEvent genEvent() {
-        book.setBookId(aggregateIdentifier);
         return new CreateBookEvent(aggregateIdentifier,book);
     }
 }

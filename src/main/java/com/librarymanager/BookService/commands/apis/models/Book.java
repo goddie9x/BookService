@@ -40,4 +40,16 @@ public class Book {
         this.name = book.getName();
         this.isReady = book.getIsReady();
     }
+
+    public void copyAttributesIfValid(Book bookNeedToUpdateInfo) {
+        if (bookNeedToUpdateInfo.getAuthor() != null) {
+            this.author = bookNeedToUpdateInfo.getAuthor();
+        }
+        if (bookNeedToUpdateInfo.getIsReady() != null) {
+            this.isReady = bookNeedToUpdateInfo.getIsReady();
+        }
+        if (bookNeedToUpdateInfo.getName() != null) {
+            this.name = bookNeedToUpdateInfo.getName();
+        }
+    }
 }
