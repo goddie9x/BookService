@@ -26,6 +26,7 @@ public class BookQueryController {
     public List<Book> getAllBookWithPagination(PaginationQueryRequest requests) {
         List<Book> response = queryGateway.query(requests.genQuery(),
                 ResponseTypes.multipleInstancesOf(Book.class)).join();
+                
         return response;
     }
 

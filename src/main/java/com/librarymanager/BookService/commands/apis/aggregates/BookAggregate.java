@@ -22,17 +22,17 @@ public class BookAggregate {
 
     @CommandHandler
     public BookAggregate(CreateBookCommand createBookCommand) {
-        applyEventToAggregateIdentifier(createBookCommand);
+        applyEventToAggregateLifecycleFromCommand(createBookCommand);
     }
 
     @CommandHandler
     public BookAggregate(UpdateBookCommand updateBookCommand) {
-        applyEventToAggregateIdentifier(updateBookCommand);
+        applyEventToAggregateLifecycleFromCommand(updateBookCommand);
     }
 
     @CommandHandler
     public BookAggregate(DeleteBookCommand deleteBookCommand) {
-        applyEventToAggregateIdentifier(deleteBookCommand);
+        applyEventToAggregateLifecycleFromCommand(deleteBookCommand);
     }
 
     @EventSourcingHandler
@@ -40,7 +40,7 @@ public class BookAggregate {
         aggregateIdentifier = event.getAggregateIdentifier();
     }
 
-    private void applyEventToAggregateIdentifier(ICommand command){
+    private void applyEventToAggregateLifecycleFromCommand(ICommand command){
         AggregateLifecycle.apply(command.genEvent());
     }
 }

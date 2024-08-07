@@ -18,23 +18,14 @@ public class BookProjection {
 
     @QueryHandler
     public Book handle(GetBookQuery bookQuery) {
-        try {
-            Book response = bookRepository.findById(bookQuery.getBookId()).orElseThrow();
-
-            return response;
-        } catch (Exception e) {
-            return null;
-        }
+        Book response = bookRepository.findById(bookQuery.getBookId()).orElse(null);
+        return response;
     }
 
     @QueryHandler
     public List<Book> handle(GetAllBookWithPaginationQuery query) {
-        try {
-            List<Book> books = bookRepository.findAll(query.toPageable()).toList();
+        List<Book> books = bookRepository.findAll(query.toPageable()).toList();
 
-            return books;
-        } catch (Exception e) {
-            return null;
-        }
+        return books;
     }
 }
