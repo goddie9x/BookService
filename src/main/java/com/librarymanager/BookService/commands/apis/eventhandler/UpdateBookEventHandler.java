@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.librarymanager.BookService.commands.apis.data.BookRepository;
 import com.librarymanager.BookService.commands.apis.events.UpdateBookEvent;
 import com.librarymanager.BookService.commands.apis.models.Book;
+import com.librarymanager.CommunicationStructure.queries.responses.BookResponse;
 
 @Component
 public class UpdateBookEventHandler {
@@ -15,10 +16,10 @@ public class UpdateBookEventHandler {
 
     @EventHandler
     public void on(UpdateBookEvent event) {
-        Book bookNeedToUpdateInfo = event.getBook();
+        BookResponse bookNeedToUpdateInfo = event.getBook();
         Book target = bookRepository.findById(bookNeedToUpdateInfo.getBookId()).orElseThrow();
 
-        target.copyAttributesIfValid(bookNeedToUpdateInfo);
+        target.copyAttributesFromBookResponseIfValid(bookNeedToUpdateInfo);
         bookRepository.save(target);
     }
 }

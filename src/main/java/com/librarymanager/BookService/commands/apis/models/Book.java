@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import com.librarymanager.BookService.commands.apis.commands.CreateBookCommand;
 import com.librarymanager.BookService.commands.apis.commands.UpdateBookCommand;
+import com.librarymanager.CommunicationStructure.queries.responses.BookResponse;
 
 @Entity
 @Table(name = "Books")
@@ -32,7 +33,7 @@ public class Book {
     }
 
     public UpdateBookCommand genUpdateBookCommand() {
-        return new UpdateBookCommand(this);
+        return new UpdateBookCommand(genBookResponse());
     }
 
     public void copy(Book book) {
@@ -40,7 +41,6 @@ public class Book {
         this.name = book.getName();
         this.isReady = book.getIsReady();
     }
-
     public void copyAttributesIfValid(Book bookNeedToUpdateInfo) {
         if (bookNeedToUpdateInfo.getAuthor() != null) {
             this.author = bookNeedToUpdateInfo.getAuthor();
@@ -51,5 +51,19 @@ public class Book {
         if (bookNeedToUpdateInfo.getName() != null) {
             this.name = bookNeedToUpdateInfo.getName();
         }
+    }
+    public void copyAttributesFromBookResponseIfValid(BookResponse bookNeedToUpdateInfo) {
+        if (bookNeedToUpdateInfo.getAuthor() != null) {
+            this.author = bookNeedToUpdateInfo.getAuthor();
+        }
+        if (bookNeedToUpdateInfo.getIsReady() != null) {
+            this.isReady = bookNeedToUpdateInfo.getIsReady();
+        }
+        if (bookNeedToUpdateInfo.getName() != null) {
+            this.name = bookNeedToUpdateInfo.getName();
+        }
+    }
+    public BookResponse genBookResponse(){
+        return new BookResponse(bookId, name, author, isReady);
     }
 }

@@ -8,9 +8,9 @@ import org.axonframework.spring.stereotype.Aggregate;
 
 import com.librarymanager.BookService.commands.apis.commands.CreateBookCommand;
 import com.librarymanager.BookService.commands.apis.commands.DeleteBookCommand;
-import com.librarymanager.BookService.commands.apis.commands.ICommand;
 import com.librarymanager.BookService.commands.apis.commands.UpdateBookCommand;
-import com.librarymanager.BookService.commands.apis.events.IEvent;
+import com.librarymanager.CommunicationStructure.commands.commands.ICommand;
+import com.librarymanager.CommunicationStructure.commands.events.IEvent;
 
 import lombok.NoArgsConstructor;
 

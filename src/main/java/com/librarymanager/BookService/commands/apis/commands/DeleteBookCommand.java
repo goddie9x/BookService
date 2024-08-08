@@ -5,13 +5,14 @@ import java.util.UUID;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import com.librarymanager.BookService.commands.apis.events.DeleteBookEvent;
+import com.librarymanager.CommunicationStructure.commands.commands.CommandAbstract;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class DeleteBookCommand implements ICommand{
+public class DeleteBookCommand extends CommandAbstract{
     @TargetAggregateIdentifier
     private String aggregateIdentifier;
     private String bookId;

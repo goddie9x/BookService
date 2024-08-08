@@ -7,13 +7,12 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.2</version>
 		<relativePath/>
-		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.librarymanager</groupId>
 	<artifactId>BookService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>BookService</name>
-	<description>Demo project for Spring Boot</description>
+	<description>BookService for librarymanager</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -78,6 +77,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.34</version>
+		</dependency>
+		<dependency>
+			<groupId>com.librarymanager</groupId>
+			<artifactId>CommunicationStructure</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

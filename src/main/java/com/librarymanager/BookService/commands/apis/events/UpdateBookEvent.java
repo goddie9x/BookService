@@ -1,6 +1,7 @@
 package com.librarymanager.BookService.commands.apis.events;
 
-import com.librarymanager.BookService.commands.apis.models.Book;
+import com.librarymanager.CommunicationStructure.commands.events.IEvent;
+import com.librarymanager.CommunicationStructure.queries.responses.BookResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,5 +10,5 @@ import lombok.Getter;
 @Getter
 public class UpdateBookEvent implements IEvent{
     private String aggregateIdentifier;
-    private Book book;
+    private BookResponse book;
 }

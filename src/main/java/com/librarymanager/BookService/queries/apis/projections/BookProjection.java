@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.librarymanager.BookService.commands.apis.data.BookRepository;
 import com.librarymanager.BookService.commands.apis.models.Book;
 import com.librarymanager.BookService.queries.apis.queries.GetAllBookWithPaginationQuery;
-import com.librarymanager.BookService.queries.apis.queries.GetBookQuery;
+import com.librarymanager.CommunicationStructure.queries.queries.GetBookByIdQuery;
 
 @Component
 public class BookProjection {
@@ -17,7 +17,7 @@ public class BookProjection {
     BookRepository bookRepository;
 
     @QueryHandler
-    public Book handle(GetBookQuery bookQuery) {
+    public Book handle(GetBookByIdQuery bookQuery) {
         Book response = bookRepository.findById(bookQuery.getBookId()).orElse(null);
         return response;
     }

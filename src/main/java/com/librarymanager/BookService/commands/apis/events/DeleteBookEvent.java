@@ -1,5 +1,7 @@
 package com.librarymanager.BookService.commands.apis.events;
 
+import com.librarymanager.CommunicationStructure.commands.events.IEvent;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
