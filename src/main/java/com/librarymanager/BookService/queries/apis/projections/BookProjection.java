@@ -10,6 +10,7 @@ import com.librarymanager.BookService.commands.apis.data.BookRepository;
 import com.librarymanager.BookService.commands.apis.models.Book;
 import com.librarymanager.BookService.queries.apis.queries.GetAllBookWithPaginationQuery;
 import com.librarymanager.CommunicationStructure.queries.queries.GetBookByIdQuery;
+import com.librarymanager.CommunicationStructure.queries.responses.BookResponse;
 
 @Component
 public class BookProjection {
@@ -17,8 +18,8 @@ public class BookProjection {
     BookRepository bookRepository;
 
     @QueryHandler
-    public Book handle(GetBookByIdQuery bookQuery) {
-        Book response = bookRepository.findById(bookQuery.getBookId()).orElse(null);
+    public BookResponse handle(GetBookByIdQuery bookQuery) {
+        BookResponse response = bookRepository.findById(bookQuery.getBookId()).orElse(null).genBookResponse();
         return response;
     }
 

@@ -35,6 +35,7 @@ public class BookCommandController {
             commandGateway.sendAndWait(entity.genUpdateBookCommand());
             return "Updated book";
         } catch (Exception e) {
+            e.printStackTrace();
             return "update failed please try again";
         }
     }
