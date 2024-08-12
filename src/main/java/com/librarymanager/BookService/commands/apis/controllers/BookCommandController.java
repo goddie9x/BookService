@@ -24,9 +24,12 @@ public class BookCommandController {
 
     @PostMapping("add")
     public String addBook(@RequestBody Book entity) {
-        commandGateway.sendAndWait(entity.genCreateBookCommand());
-
-        return "Added book";
+        try {
+            commandGateway.sendAndWait(entity.genCreateBookCommand());
+            return "Added book";
+        } catch (Exception e) {
+            return "Add book failed, please check the book info and try again later";
+        }
     }
 
     @PutMapping("update")
@@ -35,14 +38,17 @@ public class BookCommandController {
             commandGateway.sendAndWait(entity.genUpdateBookCommand());
             return "Updated book";
         } catch (Exception e) {
-            e.printStackTrace();
-            return "update failed please try again";
+            return "Update failed please check the book info and try again later";
         }
     }
 
     @DeleteMapping("/{bookId}")
     public String deleteBook(@PathVariable String bookId) {
-        commandGateway.sendAndWait(new DeleteBookCommand(bookId));
-        return "Deleted book";
+        try {
+            commandGateway.sendAndWait(new DeleteBookCommand(bookId));
+            return "Deleted book";
+        } catch (Exception e) {
+            return "Delete book failed, please check the bookId and try again later";
+        }
     }
 }

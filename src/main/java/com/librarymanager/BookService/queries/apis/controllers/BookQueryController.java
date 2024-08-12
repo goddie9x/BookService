@@ -30,10 +30,14 @@ public class BookQueryController {
 
     @GetMapping("/{bookId}")
     public Book getBookById(@PathVariable String bookId) {
-        GetBookByIdQuery query = new GetBookByIdQuery(bookId);
-        Book response = queryGateway.query(query, ResponseTypes.instanceOf(Book.class)).join();
-
-        return response;
+        try {
+            GetBookByIdQuery query = new GetBookByIdQuery(bookId);
+            Book response = queryGateway.query(query, ResponseTypes.instanceOf(Book.class)).join();
+    
+            return response;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

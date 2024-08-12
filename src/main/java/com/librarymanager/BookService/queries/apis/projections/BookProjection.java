@@ -19,8 +19,12 @@ public class BookProjection {
 
     @QueryHandler
     public BookResponse handle(GetBookByIdQuery bookQuery) {
-        BookResponse response = bookRepository.findById(bookQuery.getBookId()).orElse(null).genBookResponse();
-        return response;
+        try {
+            BookResponse response = bookRepository.findById(bookQuery.getBookId()).orElse(null).genBookResponse();
+            return response;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @QueryHandler
